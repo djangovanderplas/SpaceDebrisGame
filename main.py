@@ -12,7 +12,6 @@ clock = pygame.time.Clock()
 xmax, ymax = 800, 800
 scr = view.openwindow(xmax, ymax)
 font = pygame.font.SysFont('Arial', 20)
-Ndebris = 10
 SpeedScale = 100
 
 #Load images
@@ -25,7 +24,7 @@ RED = (245, 96, 66)
 ORANGE = (217, 127, 30)
 BLUE = (52, 140, 235)
 
-def main():
+def main(Ndebris):
     running = True
     userquit = False
 
