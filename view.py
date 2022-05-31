@@ -17,11 +17,6 @@ def openwindow(xmax, ymax):
     scr = pygame.display.set_mode((xmax, ymax))
     return scr
 
-def processevents():
-    """ Let PyGame process events, and detect keypresses. """
-
-    return
-
 def clr(scr):
     """Clears surface, fill with black"""
     scr.fill(black)
