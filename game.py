@@ -6,7 +6,7 @@ import main as m
 pygame.init()
 fps = 60
 fpsclock = pygame.time.Clock()
-width, height = 800, 800
+width, height = 1200, 800
 scr = pygame.display.set_mode((width, height))
 font = pygame.font.SysFont('Arial', 40)
 
@@ -16,7 +16,7 @@ buttons = []
 #yeah dude trust me i totally know how to do oop and totally didnt yank this from the internet  - miguelillo
 # It's gonna be fine - Django
 class Button():
-    def __init__(self, x, y, width, height, function, buttonText='Button', items=0, onePress=False):
+    def __init__(self, x, y, width, height, function, buttonText='Button', items=0, onePress=False, eqspace=False):
         self.x = x
         self.y = y
         self.width = width
@@ -26,6 +26,7 @@ class Button():
         self.alreadyPressed = False
         self.function = function
         self.items = items
+        self.eqspace = eqspace
         self.fillColors = {
             'normal': '#ffffff',
             'hover': '#666666',
@@ -45,9 +46,9 @@ class Button():
             if pygame.mouse.get_pressed(num_buttons=3)[0]:
                 self.buttonSurface.fill(self.fillColors['pressed'])
                 if self.onePress:
-                    self.function(self.items)
+                    self.function(self.items, self.eqspace)
                 elif not self.alreadyPressed:
-                    self.function(self.items)
+                    self.function(self.items, self.eqspace)
                     self.alreadyPressed = True
             else:
                 self.alreadyPressed = False
@@ -58,15 +59,15 @@ class Button():
         scr.blit(self.buttonSurface, self.buttonRect)
 
 
-def startGame(Nsats):
-    m.main(Nsats)
+def startGame(Nsats, eqspace):
+    m.main(Nsats, eqspace)
 
 
 def main():
-    Button(x=30, y=30, width=400, height=100, buttonText='Level 1',function=startGame, items=5)
-    Button(x=30, y=130, width=400, height=100, buttonText='Level 2',function=startGame, items=20)
-    Button(x=30, y=230, width=400, height=100, buttonText='Level 3', function=startGame, items=50)
-    Button(x=30, y=330, width=400, height=100, buttonText='My PC likes to suffer', function=startGame, items=1000)
+    Button(x=30, y=550, width=300, height=100, buttonText='Level 1',function=startGame, items=5)
+    Button(x=width - 30 - 300, y=550, width=300, height=100, buttonText='Level 2', function=startGame, items=15, eqspace=True)
+    Button(x=30, y=700, width=300, height=100, buttonText='Level 3',function=startGame, items=50)
+    Button(x=width - 30 - 300, y=700, width=300, height=100, buttonText='My PC likes to suffer', function=startGame, items=1000)
     while True:
         scr.fill((20, 20, 20))
         for event in pygame.event.get():

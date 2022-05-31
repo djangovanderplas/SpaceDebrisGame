@@ -9,7 +9,7 @@ pygame.init()
 # Set up window and game options
 fps = 60
 clock = pygame.time.Clock()
-xmax, ymax = 800, 800
+xmax, ymax = 1200, 800
 scr = view.openwindow(xmax, ymax)
 font = pygame.font.SysFont('Arial', 20)
 SpeedScale = 100
@@ -24,7 +24,7 @@ RED = (245, 96, 66)
 ORANGE = (217, 127, 30)
 BLUE = (52, 140, 235)
 
-def main(Ndebris):
+def main(Ndebris, eqspace=False):
     running = True
     userquit = False
 
@@ -36,9 +36,13 @@ def main(Ndebris):
     sat.InitControl()
     # Debris
     debris_list = []
-    for debris in range(0, Ndebris):
-        debris_list.append(gameobjects.Sat(theta=0, size=3, alt=3500000+random.random()*1000000., color=ORANGE, thetadot=0.0006+random.random()*0.0001, m=50, planet=earth, scr=scr))  # theta, size, alt, thetadot, m, planet
-    # For equispaced debris: theta=debris*(2*3.14/Ndebris)
+    if eqspace:
+        for debris in range(0, Ndebris):
+            debris_list.append(gameobjects.Sat(theta=debris*(2*3.14/Ndebris), size=3, alt=3500000+random.random()*1000000., color=ORANGE, thetadot=0.00055+random.random()*0.0001, m=50, planet=earth, scr=scr))  # theta, size, alt, thetadot, m, planet
+    else:
+        for debris in range(0, Ndebris):
+            debris_list.append(gameobjects.Sat(theta=0, size=3, alt=3500000+random.random()*1000000., color=ORANGE, thetadot=0.00055+random.random()*0.0001, m=50, planet=earth, scr=scr))  # theta, size, alt, thetadot, m, planet
+    # For equispaced debris:
     ### Main Loop
     while running:
         # Check running conditions:
