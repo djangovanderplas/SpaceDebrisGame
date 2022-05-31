@@ -5,7 +5,7 @@ BLUE = (53, 189, 150)
 GREEN = (116, 235, 52)
 RED = (235, 73, 52)
 
-scale = 50000
+scale = 52000
 speed_scale=10
 G = 6.674e-11
 
@@ -51,7 +51,7 @@ class Sat:
         self.pgthrust = 0
         self.draw(scr)
 
-    def draw(self, scr,satimg):
+    def draw(self, scr):
         # Determine screen coordinates
         if self.active:
             self.x = self.r/scale*math.cos(self.theta) + self.planet.x
