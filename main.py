@@ -73,6 +73,4 @@ def main(Ndebris):
     # Close window on stop condition
     view.closewindow()
 
-if __name__ == '__main__':
-    main(20)
 
