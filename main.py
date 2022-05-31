@@ -15,6 +15,11 @@ font = pygame.font.SysFont('Arial', 20)
 Ndebris = 10
 SpeedScale = 100
 
+#Load images
+earthimg = pygame.image.load('assets/earth.png')
+earthimg = pygame.transform.scale(earthimg, (270,270)) #Scaling eyeballed. But it works. So...
+background = pygame.image.load('assets/background.png')
+
 #Colors
 RED = (245, 96, 66)
 ORANGE = (217, 127, 30)
@@ -55,8 +60,10 @@ def main():
         sat.UserInput(0.00001) #This number changes max thrust of the satellite
 
         # Draw elements
+
+        scr.blit(background,(0,0)) 
         sat.draw(scr)
-        earth.draw(scr)
+        earth.draw(scr,earthimg)
         for debris in debris_list:
             debris.draw(scr)
         view.flip(fps, clock)

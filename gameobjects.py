@@ -17,8 +17,15 @@ class Planet:
         self.m = m
         self.color = BLUE
 
-    def draw(self, scr):
-        pygame.draw.circle(scr, self.color, (self.x, self.y), self.r/scale)
+    def draw(self, scr,earthimg):
+        image_x = earthimg.get_width()
+        image_y = earthimg.get_width()
+
+        try:
+            scr.blit(earthimg,((self.x-(image_x/2)),(self.y-(image_y)/2)))
+        except:
+            print('Failed to load earth image.')
+            pygame.draw.circle(scr, self.color, (self.x, self.y), self.r/scale)
 
 class Sat:
     def __init__(self, theta, size, color, alt, thetadot, m, planet, scr):
@@ -44,7 +51,7 @@ class Sat:
         self.pgthrust = 0
         self.draw(scr)
 
-    def draw(self, scr):
+    def draw(self, scr,satimg):
         # Determine screen coordinates
         if self.active:
             self.x = self.r/scale*math.cos(self.theta) + self.planet.x
