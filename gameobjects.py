@@ -130,10 +130,13 @@ class Satellite(Sat):
 
 class Debris(Sat):
     def draw(self, scr):
+        image = pygame.image.load('assets/debris.png')
+        image = pygame.transform.scale(image, (40, 40))
         # Determine screen coordinates
         if self.active:
             self.x = self.r/scale*math.cos(self.theta) + self.planet.x
             self.y = -self.r/scale*math.sin(self.theta) + self.planet.y
 
         # Draw sat
-            pygame.draw.circle(scr, self.color, (self.x, self.y), self.size)
+            #pygame.draw.circle(scr, self.color, (self.x, self.y), self.size)
+            scr.blit(image, (self.x - 20, self.y - 20))
