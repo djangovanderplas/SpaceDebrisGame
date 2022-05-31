@@ -10,7 +10,7 @@ fpsclock = pygame.time.Clock()
 width, height = 1200, 800
 scr = pygame.display.set_mode((width, height))
 font = pygame.font.SysFont('Courier New', 40)
-
+background = pygame.image.load('assets/background.png')
 
 buttons = []
 
@@ -68,7 +68,7 @@ def main():
     Button(x=width - 30 - 300, y=550, width=300, height=100, buttonText='Level 2', function=startGame, items=15, eqspace=True)
     Button(x=30, y=700, width=300, height=100, buttonText='Level 3',function=startGame, items=50)
     Button(x=width - 30 - 300, y=700, width=300, height=100, buttonText='PC go brrrr', function=startGame, items=1000)
-    scr.fill((20,20,20))
+    scr.blit(background,(0,0))
     text_list = ['Commander, I have bad news! The Russians just ','shot the ISS and large pieces of debris are ','threatening to come down on earth!','  It\'s up to you to control our Space Garbage','Collector. But make sure not to crash with the','Russian military satellites! That won\'t be good.']
     label = []
     for line in text_list:
@@ -87,7 +87,7 @@ def main():
     pygame.display.flip()
     pygame.time.wait(5000)
     while True:
-        scr.fill((20, 20, 20))
+        scr.blit(background,(0,0))
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
