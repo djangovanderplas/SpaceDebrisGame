@@ -106,3 +106,13 @@ class NoTouchSat(Sat):
         if self.active:
             if distance < 10:
                 sat.active = False
+
+class Debris(Sat):
+    def draw(self, scr):
+        # Determine screen coordinates
+        if self.active:
+            self.x = self.r/scale*math.cos(self.theta) + self.planet.x
+            self.y = -self.r/scale*math.sin(self.theta) + self.planet.y
+
+        # Draw sat
+            pygame.draw.circle(scr, self.color, (self.x, self.y), self.size)
