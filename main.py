@@ -39,12 +39,12 @@ def main(Ndebris, eqspace=False):
     nsats = []
     if eqspace:
         for debris in range(0, Ndebris):
-            debris_list.append(gameobjects.Debris(theta=debris*(2*3.14/Ndebris), size=3, alt=3500000+random.random()*1000000., color=ORANGE, thetadot=0.00055+random.random()*0.0001, m=50, planet=earth, scr=scr))  # theta, size, alt, thetadot, m, planet
+            debris_list.append(gameobjects.Debris(theta=debris*(2*3.14/Ndebris), size=3, alt=3500000+random.random()*1000000., color=BLUE, thetadot=0.00055+random.random()*0.0001, m=50, planet=earth, scr=scr))  # theta, size, alt, thetadot, m, planet
     else:
         for debris in range(0, Ndebris):
             debris_list.append(gameobjects.Debris(theta=0, size=3, alt=3500000+random.random()*1000000., color=ORANGE, thetadot=0.00055+random.random()*0.0001, m=50, planet=earth, scr=scr))  # theta, size, alt, thetadot, m, planet
     for nsat in range(0, round(Ndebris/5)):
-        nsats.append(gameobjects.NoTouchSat(theta=nsat*(2*3.14/round(Ndebris/5)), size=5, alt=3000000+random.random()*2000000, color=RED, thetadot=0.00055+random.random()*0.0001, m=50, planet=earth, scr=scr))
+        nsats.append(gameobjects.NoTouchSat(theta=nsat*(2*3.14/round(Ndebris/5)), size=5, alt=3000000+random.random()*2000000, color=BLUE, thetadot=0.00055+random.random()*0.0001, m=50, planet=earth, scr=scr))
 
     # For equispaced debris:
     ### Main Loop
@@ -56,7 +56,10 @@ def main(Ndebris, eqspace=False):
         view.clr(scr)
         if not sat.active:
             userquit = True
-
+            print("Oh no you crashed your Space Sweeper!")
+        if not debris_list:
+            userquit = True
+            print("Congrats you won!")
         # Handle physics
         for i in range(0, SpeedScale): #runs the simulation SpeedScale times per frame
             sat.physics(fps)
