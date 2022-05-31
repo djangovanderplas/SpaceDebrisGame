@@ -32,7 +32,7 @@ def main(Ndebris, eqspace=False):
     # Planet
     earth = gameobjects.Planet(r=6371000, x=xmax/2, y=ymax/2, m=5.9e24)
     # Player sat:
-    sat = gameobjects.Sat(theta=0, size=5, alt=1000000, color=BLUE, thetadot=0.001, m=50, planet=earth, scr=scr) #theta, size, alt, thetadot, m, planet
+    sat = gameobjects.Satellite(theta=0, size=4, alt=1000000, color=BLUE, thetadot=0.001, m=50, planet=earth, scr=scr) #theta, size, alt, thetadot, m, planet
     sat.InitControl()
     # Debris
     debris_list = []

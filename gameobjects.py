@@ -4,6 +4,8 @@ import pygame, math
 BLUE = (53, 189, 150)
 GREEN = (116, 235, 52)
 RED = (235, 73, 52)
+ORANGE = (255, 187, 0)
+BLACK = (0,0,0)
 
 scale = 52000
 speed_scale=10
@@ -37,6 +39,7 @@ class Sat:
         self.colorhistory = color
         self.control = False
         self.active = True
+        self.image = pygame.image.load('assets/satellite.png')
 
         ### Dynamic properties
         # Position
@@ -76,20 +79,6 @@ class Sat:
     def InitControl(self):
         self.control = True
 
-    def UserInput(self, thrust):
-        if self.control:
-            keys = pygame.key.get_pressed()
-            prograde = 0
-            if keys[pygame.K_RIGHT]:
-                prograde = 1
-                self.color = GREEN
-            elif keys[pygame.K_LEFT]:
-                prograde = -1
-                self.color = RED
-            else:
-                self.color = self.colorhistory
-            self.pgthrust = thrust*prograde
-
     def checkCollision(self, planet, sat):
         distance = math.sqrt((self.x-sat.x)**2+(self.y-sat.y)**2)
         if not self.control:
@@ -106,6 +95,38 @@ class NoTouchSat(Sat):
         if self.active:
             if distance < 10:
                 sat.active = False
+
+class Satellite(Sat):
+
+    def draw(self, scr):
+        image = self.image
+        image = pygame.transform.scale(image, (15, 15))
+        image = pygame.transform.rotate(image, (math.degrees(self.theta)+180))
+        # Determine screen coordinates
+        if self.active:
+            self.x = self.r/scale*math.cos(self.theta) + self.planet.x
+            self.y = -self.r/scale*math.sin(self.theta) + self.planet.y
+
+        # Draw sat
+            pygame.draw.circle(scr, self.color, (self.x, self.y), self.size)
+            scr.blit(image, (self.x-7.5, self.y-7.5))
+
+    def UserInput(self, thrust):
+        if self.control:
+            keys = pygame.key.get_pressed()
+            prograde = 0
+            if keys[pygame.K_RIGHT]:
+                prograde = 1
+                self.color = BLACK
+                self.image = pygame.image.load('assets/satellite_prograde.png')
+            elif keys[pygame.K_LEFT]:
+                prograde = -1
+                self.color = BLACK
+                self.image = pygame.image.load('assets/satellite_retrograde.png')
+            else:
+                self.color = BLACK
+                self.image = pygame.image.load('assets/satellite.png')
+            self.pgthrust = thrust*prograde
 
 class Debris(Sat):
     def draw(self, scr):
