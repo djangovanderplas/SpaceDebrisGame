@@ -1,5 +1,5 @@
 import sys,pygame
-#import main as m
+import main as m
 # Configuration
 pygame.init()
 fps = 60
@@ -11,17 +11,18 @@ font = pygame.font.SysFont('Arial', 40)
 
 buttons = []
 
+#yeah dude trust me i totally know how to do oop and totally didnt yank this from the internet  - miguelillo
 class Button():
-    def __init__(self, x, y, width, height, buttonText='Button', onclickFunction=None, onePress=False):
+    def __init__(self, x, y, width, height, function, buttonText='Button', items=0, onePress=False):
         self.x = x
         self.y = y
         self.width = width
         print('1')
         self.height = height
-        self.onclickFunction = onclickFunction
         self.onePress = onePress
         self.alreadyPressed = False
-
+        self.function = function
+        self.items = items
         self.fillColors = {
             'normal': '#ffffff',
             'hover': '#666666',
@@ -41,9 +42,9 @@ class Button():
             if pygame.mouse.get_pressed(num_buttons=3)[0]:
                 self.buttonSurface.fill(self.fillColors['pressed'])
                 if self.onePress:
-                    self.onclickFunction()
+                    self.function(self.items)
                 elif not self.alreadyPressed:
-                    self.onclickFunction()
+                    self.function(self.items)
                     self.alreadyPressed = True
             else:
                 self.alreadyPressed = False
@@ -55,14 +56,14 @@ class Button():
 
 
 def startGame(Nsats):
-    #m.main(Nsats)
+    m.main(Nsats)
 
     return None
 
 
 def main():
-    #yeah dude trust me i totally know how to do oop and totally didnt yank this from the internet  - miguelillo
-    Button(30,30,400,100,'Start the game in easy mode',5)
+    Button(x=30, y=30, width=400, height=100, buttonText='Easy Mode',function=startGame, items=5)
+    Button(x=30, y=130, width=400, height=100, buttonText='Hard Mode',function=startGame, items=50)
     while True:
         scr.fill((20, 20, 20))
         for event in pygame.event.get():
