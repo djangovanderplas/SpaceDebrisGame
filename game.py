@@ -4,11 +4,12 @@ import sys,pygame
 import main as m
 # Configuration
 pygame.init()
+pygame.font.init()
 fps = 60
 fpsclock = pygame.time.Clock()
 width, height = 1200, 800
 scr = pygame.display.set_mode((width, height))
-font = pygame.font.SysFont('Arial', 40)
+font = pygame.font.SysFont('Courier New', 40)
 
 
 buttons = []
@@ -20,7 +21,6 @@ class Button():
         self.x = x
         self.y = y
         self.width = width
-        print('1')
         self.height = height
         self.onePress = onePress
         self.alreadyPressed = False
@@ -68,8 +68,27 @@ def main():
     Button(x=width - 30 - 300, y=550, width=300, height=100, buttonText='Level 2', function=startGame, items=15, eqspace=True)
     Button(x=30, y=700, width=300, height=100, buttonText='Level 3',function=startGame, items=50)
     Button(x=width - 30 - 300, y=700, width=300, height=100, buttonText='PC go brrrr', function=startGame, items=1000)
+    scr.fill((20,20,20))
+    text_list = ['Commander, I have bad news! The Russians just ','shot the ISS and large pieces of debris are ','threatening to come down on earth!','  It\'s up to you to control our Space Garbage','Collector. But make sure not to crash with the','Russian military satellites! That won\'t be good.']
+    label = []
+    for line in text_list:
+        label.append(font.render(line,True,(255,255,255)))
+    scr.blit(label[0],pygame.Rect(50,150,600,800))
+    pygame.display.flip()
+    scr.blit(label[1],pygame.Rect(70,200,600,800))
+    pygame.display.flip()
+    scr.blit(label[2],pygame.Rect(180,250,600,800))
+    pygame.display.flip()
+    scr.blit(label[3],pygame.Rect(30,300,600,800))
+    pygame.display.flip()
+    scr.blit(label[4],pygame.Rect(30,350,600,800))
+    pygame.display.flip()
+    scr.blit(label[5],pygame.Rect(20,400,600,800))
+    pygame.display.flip()
+    pygame.time.wait(5000)
     while True:
         scr.fill((20, 20, 20))
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -78,7 +97,7 @@ def main():
             object.process()
         pygame.display.flip()
         fpsclock.tick(fps)
-
+    
 if __name__ == '__main__':
     main()
 
