@@ -97,3 +97,12 @@ class Sat:
                 self.active = False
         if self.r < planet.r:
             self.active = False
+
+class NoTouchSat(Sat):
+    def checkCollision(self, planet, sat):
+        distance = math.sqrt((self.x-sat.x)**2+(self.y-sat.y)**2)
+        if self.r < planet.r:
+            self.active = False
+        if self.active:
+            if distance < 10:
+                sat.active = False

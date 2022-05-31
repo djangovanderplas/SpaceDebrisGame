@@ -67,7 +67,7 @@ def main():
     Button(x=30, y=550, width=300, height=100, buttonText='Level 1',function=startGame, items=5)
     Button(x=width - 30 - 300, y=550, width=300, height=100, buttonText='Level 2', function=startGame, items=15, eqspace=True)
     Button(x=30, y=700, width=300, height=100, buttonText='Level 3',function=startGame, items=50)
-    Button(x=width - 30 - 300, y=700, width=300, height=100, buttonText='My PC likes to suffer', function=startGame, items=1000)
+    Button(x=width - 30 - 300, y=700, width=300, height=100, buttonText='PC go brrrr', function=startGame, items=1000)
     while True:
         scr.fill((20, 20, 20))
         for event in pygame.event.get():

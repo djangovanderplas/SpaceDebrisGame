@@ -34,6 +34,7 @@ def main(Ndebris, eqspace=False):
     # Player sat:
     sat = gameobjects.Sat(theta=0, size=5, alt=1000000, color=BLUE, thetadot=0.001, m=50, planet=earth, scr=scr) #theta, size, alt, thetadot, m, planet
     sat.InitControl()
+    NoTouchSat = gameobjects.NoTouchSat(theta=2, size=5, alt=1000000, color=RED, thetadot=0.001, m=50, planet=earth, scr=scr)  # theta, size, alt, thetadot, m, planet
     # Debris
     debris_list = []
     if eqspace:
@@ -57,6 +58,8 @@ def main(Ndebris, eqspace=False):
         for i in range(0, SpeedScale): #runs the simulation SpeedScale times per frame
             sat.physics(fps)
             sat.checkCollision(planet=earth, sat=sat)
+            NoTouchSat.physics(fps)
+            NoTouchSat.checkCollision(planet=earth, sat=sat)
             for debris in debris_list:
                 debris.physics(fps)
                 debris.checkCollision(planet=earth, sat=sat)
@@ -68,6 +71,7 @@ def main(Ndebris, eqspace=False):
 
         scr.blit(background,(0,0)) 
         sat.draw(scr)
+        NoTouchSat.draw(scr)
         earth.draw(scr,earthimg)
         for debris in debris_list:
             debris.draw(scr)
