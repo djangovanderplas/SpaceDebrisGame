@@ -1,3 +1,5 @@
+# Menu created by Miguel Castro
+
 import sys,pygame
 import main as m
 # Configuration
@@ -12,6 +14,7 @@ font = pygame.font.SysFont('Arial', 40)
 buttons = []
 
 #yeah dude trust me i totally know how to do oop and totally didnt yank this from the internet  - miguelillo
+# It's gonna be fine - Django
 class Button():
     def __init__(self, x, y, width, height, function, buttonText='Button', items=0, onePress=False):
         self.x = x
@@ -58,12 +61,12 @@ class Button():
 def startGame(Nsats):
     m.main(Nsats)
 
-    return None
-
 
 def main():
-    Button(x=30, y=30, width=400, height=100, buttonText='Easy Mode',function=startGame, items=5)
-    Button(x=30, y=130, width=400, height=100, buttonText='Hard Mode',function=startGame, items=50)
+    Button(x=30, y=30, width=400, height=100, buttonText='Level 1',function=startGame, items=5)
+    Button(x=30, y=130, width=400, height=100, buttonText='Level 2',function=startGame, items=20)
+    Button(x=30, y=230, width=400, height=100, buttonText='Level 3', function=startGame, items=50)
+    Button(x=30, y=330, width=400, height=100, buttonText='My PC likes to suffer', function=startGame, items=1000)
     while True:
         scr.fill((20, 20, 20))
         for event in pygame.event.get():
