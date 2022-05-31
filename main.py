@@ -33,16 +33,16 @@ def main():
     # Planet
     earth = gameobjects.Planet(r=6371000, x=xmax/2, y=ymax/2, m=5.9e24)
     # Player sat:
-    sat = gameobjects.Sat(theta=3.14, size=5, alt=2500000, color=BLUE, thetadot=0.00075, m=50, planet=earth, scr=scr) #theta, size, alt, thetadot, m, planet
+    sat = gameobjects.Sat(theta=0, size=5, alt=1000000, color=BLUE, thetadot=0.001, m=50, planet=earth, scr=scr) #theta, size, alt, thetadot, m, planet
     sat.InitControl()
     # Debris
     debris_list = []
     for debris in range(0, Ndebris):
-        debris_list.append(gameobjects.Sat(theta=0, size=3, alt=2500000+random.random()*1000000., color=ORANGE, thetadot=0.0006+random.random()*0.0001, m=50, planet=earth, scr=scr))  # theta, size, alt, thetadot, m, planet
+        debris_list.append(gameobjects.Sat(theta=0, size=3, alt=3500000+random.random()*1000000., color=ORANGE, thetadot=0.0006+random.random()*0.0001, m=50, planet=earth, scr=scr))  # theta, size, alt, thetadot, m, planet
     # For equispaced debris: theta=debris*(2*3.14/Ndebris)
     ### Main Loop
     while running:
-        # Check running conditions:]
+        # Check running conditions:
         if userquit:
             running = False
         view.checkEvents()
@@ -57,6 +57,8 @@ def main():
             for debris in debris_list:
                 debris.physics(fps)
                 debris.checkCollision(planet=earth, sat=sat)
+                if not debris.active:
+                    debris_list.remove(debris)
         sat.UserInput(0.00001) #This number changes max thrust of the satellite
 
         # Draw elements
@@ -72,9 +74,6 @@ def main():
     # Close window on stop condition
     view.closewindow()
 
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    main()
+    main(20)
 
